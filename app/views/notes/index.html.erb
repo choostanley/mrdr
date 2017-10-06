@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Notes</h1>
+<h1><%= current_user.email %>'s Notes</h1>
 
 <table>
   <thead>
@@ -27,3 +27,12 @@
 <br>
 
 <%= link_to 'New Note', new_note_path %>
+
+<br>
+<br>
+<% if signed_in? %>
+  <%= current_user.email %>
+  <%= button_to "Sign out", sign_out_path, method: :delete %>
+<% else %>
+  <%= link_to "Sign in", sign_in_path %>
+<% end %>
