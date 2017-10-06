@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
   resources :notes
   # get 'welcome/index'
-  root 'welcome#index'
+  # root 'welcome#index'
+
+  # need both constraints to work
+  constraints Clearance::Constraints::SignedIn.new do
+    root to: "notes#index", as: :signed_in_root
+  end
+
+  constraints Clearance::Constraints::SignedOut.new do
+    root to: "welcome#index"
+  end
 
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
