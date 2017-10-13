@@ -99,17 +99,21 @@
     </div>
     <div class="col-sm-7 slideanim">
       <div class="row">
-        <div class="col-sm-6 form-group">
-          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
-        </div>
-        <div class="col-sm-6 form-group">
-          <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
-        </div>
+        <div id="clearance" class="sign-in">
+            <h2><%= t(".title") %></h2>
+
+            <%= render partial: '/sessions/form' %>
+
+          </div>
       </div>
-      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+      
+      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea>
+      <select id="voiceselection"></select>
+      <br>
       <div class="row">
         <div class="col-sm-12 form-group">
-          <button class="btn btn-default pull-right" type="submit">Send</button>
+          <input class="btn btn-default pull-right" onclick="responsiveVoice.speak($('#comments').val(), $('#voiceselection').val());"
+          type="button" value= "Play" />
         </div>
       </div>
     </div>
@@ -151,8 +155,9 @@
 	  <%= link_to "Sign in", sign_in_path %>
 	<% end %>
 
-
+<script src="https://code.responsivevoice.org/responsivevoice.js"></script>
 <script>
+
 $(document).ready(function(){
   // Add smooth scrolling to all links in navbar + footer link
   $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
@@ -186,5 +191,12 @@ $(document).ready(function(){
         }
     });
   });
+
+  //Populate voice selection dropdown
+        var voicelist = responsiveVoice.getVoices();
+        var vselect = $("#voiceselection");
+        $.each(voicelist, function() {
+                vselect.append($("<option />").val(this.name).text(this.name));
+        });
 })
 </script>
