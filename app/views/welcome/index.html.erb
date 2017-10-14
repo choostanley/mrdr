@@ -37,7 +37,8 @@
             <p><%= note.content %></p>
           </div>
           <div class="panel-footer">
-            <button class="btn btn-lg">Sign Up</button>
+            <h4><%= time_ago_in_words(note.lastseen) %></h4>
+            <%= link_to 'Show', note, class: "btn btn-lg"%>
           </div>
         </div>      
       </div>

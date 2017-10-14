@@ -10,6 +10,8 @@ class NotesController < ApplicationController
   # GET /notes/1
   # GET /notes/1.json
   def show
+    @note.lastseen = Time.now
+    @note.save
   end
 
   # GET /notes/new
