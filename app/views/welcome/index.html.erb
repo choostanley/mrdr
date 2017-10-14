@@ -20,6 +20,32 @@
   </div>
 </nav>
 
+<% if signed_in? %>
+  <div id="pricing" class="container-fluid">
+    <div class="text-center">
+      <h2>Notes</h2>
+      <h4>Listen UP!!</h4>
+    </div>
+    <div class="row slideanim">
+      <% @notes.each do |note| %>
+      <div class="col-sm-4 col-xs-12">
+        <div class="panel panel-default text-center">
+          <div class="panel-heading">
+            <h1><%= note.title %></h1>
+          </div>
+          <div class="panel-body">
+            <p><%= note.content %></p>
+          </div>
+          <div class="panel-footer">
+            <button class="btn btn-lg">Sign Up</button>
+          </div>
+        </div>      
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+<% else %>
 <!-- Container (Pricing Selection) -->
 <div id="pricing" class="container-fluid">
   <div class="text-center">
@@ -86,6 +112,7 @@
     </div>    
   </div>
 </div>
+<% end %>
 
 <!-- Container (Contact Section) -->
 <div id="contact" class="container-fluid bg-grey">

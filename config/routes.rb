@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # need both constraints to work
   constraints Clearance::Constraints::SignedIn.new do
-    root to: "notes#index", as: :signed_in_root
+    root to: "welcome#index", as: :signed_in_root
   end
 
   constraints Clearance::Constraints::SignedOut.new do
