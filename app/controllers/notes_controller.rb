@@ -5,7 +5,6 @@ class NotesController < ApplicationController
   # GET /notes.json
   def index
     @notes = Note.where(user_id: current_user)
-    byebug
   end
 
   # GET /notes/1
