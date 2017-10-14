@@ -1,5 +1,12 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
+  before_filter :validate_user
+
+  def validate_user
+    if current_user == nil
+      redirect_to root_url
+    end
+  end
 
   # GET /notes
   # GET /notes.json
