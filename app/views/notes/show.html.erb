@@ -10,6 +10,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><select id="voiceselection" style="color: black;"></select></a></li>
         <li><a href="#logout">Logout</a></li>
       </ul>
     </div>
@@ -26,9 +27,18 @@
       <h2><strong>Title: </strong> <%= @note.title %></h2>
       <br>
       <h4><strong>CONTENT: </strong> <%= @note.content %></h4>
-      <br>
-      <p><strong>VISION:</strong> Our vision Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <% x = 1 %>
+      <% @note.snotes.each do |snote|%>
+        <button type="button" class="col-md-8 col-sm-8 btn btn-block" data-toggle="collapse" data-target="#demo<%= x %>"> <%= snote.title %> </button>
+        <div id="demo<%= x %>" class="col-md-8 col-sm-8 collapse">
+        <p><%= snote.answer %></p>
+        <input
+          onclick="responsiveVoice.speak($(this).prev().html(), $('#voiceselection').val());"
+          type="button"
+          value="Play"/>
+        </div>
+        <% x += 1 %>
+      <% end %>
     </div>
   </div>
 </div>
@@ -53,3 +63,15 @@
   <%= link_to "", sign_out_path, class: 'glyphicon glyphicon-log-out',method: :delete %>
   <p>Log Out. Go get some rest.</p>
 </footer>
+
+<script src="https://code.responsivevoice.org/responsivevoice.js"></script>
+<script>
+  //Populate voice selection dropdown
+    var voicelist = responsiveVoice.getVoices();
+    var vselect = $("#voiceselection");
+    $.each(voicelist, function() {
+    vselect.append($("<option />").val(this.name).text(this.name));
+  });
+
+    
+</script>
