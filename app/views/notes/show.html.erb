@@ -33,6 +33,9 @@
   </div>
 </div>
 
+<% @snote = Snote.new %>
+<%= render 'snotes/form', snote: @snote %>
+
 <p>
   <strong>Title:</strong>
   <%= @note.title %>

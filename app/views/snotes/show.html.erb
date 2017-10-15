@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @snote.title %>
+</p>
+
+<p>
+  <strong>Answer:</strong>
+  <%= @snote.answer %>
+</p>
+
+<p>
+  <strong>Pnote:</strong>
+  <%= @snote.pnote %>
+</p>
+
+<p>
+  <strong>Freq:</strong>
+  <%= @snote.freq %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @snote.user %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @snote.note %>
+</p>
+
+<%= link_to 'Edit', edit_snote_path(@snote) %> |
+<%= link_to 'Back', snotes_path %>

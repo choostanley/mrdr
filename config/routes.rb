@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :notes
+  resources :snotes
+  resources :notes do
+    resources :snotes, only: [:create]
+  end
   # get 'welcome/index'
   # root 'welcome#index'
 
