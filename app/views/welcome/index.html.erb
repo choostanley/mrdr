@@ -6,22 +6,23 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#myPage">Logo</a>
+      <a class="navbar-brand" href="#myPage">MrDr</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#about">ABOUT</a></li>
-        <li><a href="#services">SERVICES</a></li>
-        <li><a href="#portfolio">PORTFOLIO</a></li>
-        <li><a href="#pricing">PRICING</a></li>
-        <li><a href="#contact">CONTACT</a></li>
+      <% if signed_in? %>
+        <li><a href="#notes">NOTES</a></li>
+        <li><a href="#signout">SIGN OUT</a></li>
+      <% else %>
+        <li><a href="#signin">SIGN IN</a></li>
+      <% end %>
       </ul>
     </div>
   </div>
 </nav>
 
 <% if signed_in? %>
-  <div id="pricing" class="container-fluid">
+  <div id="notes" class="container-fluid">
     <div class="text-center">
       <h2>Notes</h2>
       <h4>Listen UP!!</h4>
@@ -46,11 +47,18 @@
     </div>
   </div>
 
-<% end %>
+  <%= link_to 'New Note', new_note_path %>
+
+  <footer id="signout" class="container-fluid text-center">
+    <%= link_to "", sign_out_path, class: 'glyphicon glyphicon-log-out',method: :delete %>
+    <p><%= current_user.email %> <br>
+    Log Out. Go get some rest.</p>
+  </footer>
+<% else %>
 
 <!-- Container (Contact Section) -->
-<div id="contact" class="container-fluid bg-grey">
-  <h2 class="text-center">CONTACT</h2>
+<div id="signin" class="container-fluid bg-grey">
+  <h2 class="text-center">SIGN IN</h2>
   <div class="row">
     <div class="col-sm-5">
       <p>Contact us and we'll get back to you within 24 hours.</p>
@@ -68,7 +76,7 @@
           </div>
       </div>
       
-      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea>
+      <textarea class="form-control" id="comments" name="comments" placeholder="Play me out loud!!" rows="5"></textarea>
       <select id="voiceselection"></select>
       <br>
       <div class="row">
@@ -80,41 +88,7 @@
     </div>
   </div>
 </div>
-
-
-<br>
-<br>
-<h2>Welcome#index</h2>
-<p>Find me in app/views/welcome/index.html.erb</p>
-
-	<% if signed_in? %>
-	<%= link_to 'New Note', new_note_path %>
-	<% end %>
-<br>
-  <div id="contact" class="container-fluid bg-grey">
-	  <h2 class="text-center">CONTACT</h2>
-	  <div class="row">
-  	  <div class="col-sm-7 slideanim">
-        <div class="row">
-      		<div id="clearance" class="sign-in">
-      		  <h2><%= t(".title") %></h2>
-
-      		  <%= render partial: '/sessions/form' %>
-
-      		</div>
-  	    </div>
-  	  </div>
-	  </div>
-  </div>
-
-
-<br>
-	<% if signed_in? %>
-	  <%= current_user.email %>
-	  <%= button_to "Sign out", sign_out_path, method: :delete %>
-	<% else %>
-	  <%= link_to "Sign in", sign_in_path %>
-	<% end %>
+<% end %>
 
 <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
 <script>
