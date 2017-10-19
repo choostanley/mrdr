@@ -35,7 +35,8 @@
         <button type="button" class="col-md-8 col-sm-8 btn btn-block" style="white-space: normal;" data-toggle="collapse" data-target="#demo<%= x %>"> <%= snote.title %>
         </button>
         <div id="demo<%= x %>" class="col-md-12 col-sm-12 collapse">
-        <p><%= snote.answer %></p>
+        <p><%= simple_format(snote.answer) %></p>
+        <p style="display: none"><%= snote.answer %></p>
         <input class="btn"
           onclick="responsiveVoice.speak($(this).prev().html(), $('#voiceselection').val());"
           type="button"
