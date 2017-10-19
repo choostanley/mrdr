@@ -30,5 +30,6 @@
   <%= @snote.note %>
 </p>
 
+<%= link_to 'Bank to Note', @snote.note, class: "btn btn-lg" %> |
 <%= link_to 'Edit', edit_snote_path(@snote) %> |
 <%= link_to 'Back', snotes_path %>

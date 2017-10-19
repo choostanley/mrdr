@@ -1,4 +1,4 @@
-<%= form_for [@note, snote] do |f| %>
+<%= form_for [@note, snote], html: { class: "form-group"} do |f| %>
   <% if snote.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(snote.errors.count, "error") %> prohibited this snote from being saved:</h2>
@@ -11,22 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+  <div class="field form-group col-sm-8">
+    <%= f.text_field :title, type: 'text', class: "form-control", placeholder: 'Title'%>
+  </div>
+  <br>
+
+  <div class="field form-group col-sm-8">
+    <%= f.text_area :answer, type: 'text', class: "form-control", placeholder: 'Answer', id: "comment" %>
   </div>
 
-  <div class="field">
-    <%= f.label :answer %>
-    <%= f.text_area :answer, id: "comment" %>
+  <div class="field form-group col-sm-8">
+    <%= f.text_area :pnote, type: 'text', class: "form-control", placeholder: 'Pnote' %>
   </div>
 
-  <div class="field">
-    <%= f.label :pnote %>
-    <%= f.text_area :pnote %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions form-group col-sm-6">
+    <%= f.submit type: 'submit', class: 'btn btn-default'%>
   </div>
 <% end %>

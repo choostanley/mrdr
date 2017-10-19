@@ -6,11 +6,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#myPage">Logo</a>
+      <a class="navbar-brand" href="/">MrDr</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><select id="voiceselection" style="color: black;"></select></a></li>
+        <li><a href="#snote">New Snote</a></li>
         <li><a href="#logout">Logout</a></li>
       </ul>
     </div>
@@ -26,7 +27,8 @@
     <div class="col-sm-8">
       <h2><strong>Title: </strong> <%= @note.title %></h2>
       <br>
-      <h4><strong>CONTENT: </strong> <%= @note.content %></h4>
+      <h4>CONTENT: <%= @note.content %></h4>
+      <%= link_to 'Edit', edit_note_path(@note), class: "btn btn-lg" %>
       <% if @note.snotes.any? %>
       <% x = 1 %>
       <% @note.snotes.each do |snote|%>
@@ -50,6 +52,7 @@
           onclick="responsiveVoice.cancel();"
           type="button"
           value="Stop"/>
+          <%= link_to 'Edit', edit_snote_path(snote) %>
           <button type="button" class="col-md-8 col-sm-8 btn pull-left" style="display: inline-block;" data-toggle="collapse" data-target="#demos<%= x %>"> Reminder </button>
           <div id="demos<%= x %>" class="col-md-8 col-sm-8 collapse pull-left">
           <p><%= snote.pnote %></p>
@@ -62,21 +65,19 @@
   </div>
 </div>
 
-<% @snote = Snote.new %>
+  <div id="snote" class="container-fluid bg-grey">
+    <h2 class="text-left">New Snote</h2>
+    <div class="row">
+      <div class="col-sm-7">
+        <div class="row">    
+            <% @snote = Snote.new %>
 <%= render 'snotes/form', snote: @snote %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @note.title %>
-</p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @note.content %>
-</p>
-
-<%= link_to 'Edit', edit_note_path(@note) %> |
-<%= link_to 'Back', notes_path %>
 
 <footer id="logout" class="container-fluid text-center">
   <%= link_to "", sign_out_path, class: 'glyphicon glyphicon-log-out',method: :delete %>
